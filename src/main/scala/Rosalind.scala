@@ -38,6 +38,12 @@ object Rosalind {
     })
     .toMap
 
+  val AminoAcidToWeight: Map[String, Double] = readFile("MonoIsotopicMassTable.txt")
+    .map(_.split(" ").map(_.trim).filter(_.nonEmpty) match {
+      case Array(aa, weightStr) => aa -> weightStr.toDouble
+    })
+    .toMap
+
   case class FastaSegment(label: String, dna: String) {
     lazy val gcContent: Double = {
       val totalLength = dna.length
